@@ -1,6 +1,9 @@
 ##9/26
+
 To do list​
+
 ·Figure out how to use the interactive segmentation model.​
+
 ·Load and run the web mapping data locally.
 
 ##10/3
