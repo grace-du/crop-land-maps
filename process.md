@@ -71,22 +71,18 @@ To do list:
 pick up last week's tasks.
 
 Process:
+
   Benifit of pmtiles:
   
-    Single File Archive: Unlike traditional tilesets that store each tile as an individual file, PMTiles packs the entire tileset into a single, optimized file. 
-    This reduces the number of HTTP requests needed to fetch tiles.
+-Single File Archive: Unlike traditional tilesets that store each tile as an individual file, PMTiles packs the entire tileset into a single, optimized file. This reduces the number of HTTP requests needed to fetch tiles.
 
-    HTTP Range Requests: PMTiles leverages HTTP range requests to fetch only the parts of the file necessary to render the current view, rather than downloading 
-    the entire file.
+-HTTP Range Requests: PMTiles leverages HTTP range requests to fetch only the parts of the file necessary to render the current view, rather than downloading the entire file.
     
-    Cloud Storage Compatibility: The single-file format is highly compatible with cloud object stores like Amazon S3, which can efficiently serve range requests.
+-Cloud Storage Compatibility: The single-file format is highly compatible with cloud object stores like Amazon S3, which can efficiently serve range requests.
     
-    Multi-resolution Storage: PMTiles stores tiles at multiple zoom levels, allowing applications to request the appropriate resolution based on the zoom level of 
-    the map view.
+-Multi-resolution Storage: PMTiles stores tiles at multiple zoom levels, allowing applications to request the appropriate resolution based on the zoom level of the map view.
     
-    Tooling: The PMTiles project provides tools for converting existing MBTiles archives to PMTiles, serving PMTiles archives over HTTP, and integrating PMTiles 
-    into web applications.
+-Tooling: The PMTiles project provides tools for converting existing MBTiles archives to PMTiles, serving PMTiles archives over HTTP, and integrating PMTiles into web applications.
     
-    Web Integration: PMTiles can be used on the web by utilizing JavaScript libraries that support the format. This allows for seamless integration into existing
-    web mapping applications.
+-Web Integration: PMTiles can be used on the web by utilizing JavaScript libraries that support the format. This allows for seamless integration into existing web mapping applications.
 
