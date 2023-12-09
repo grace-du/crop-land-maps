@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PMTiles OpenLayers Vector with MapTiler Hybrid Base Map</title>
+    <meta charset="utf-8"/>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
+    <script src="https://unpkg.com/ol-pmtiles@0.3.0/dist/olpmtiles.js"></script>
+    <style>
+        body, #map {
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script type="text/javascript">
+        // MapTiler hybrid base layer
+        const hybridBaseLayer = new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=0rXt9evmwC5e2EW3sauy',
+                attributions: '© MapTiler © OpenStreetMap contributors',
+                maxZoom: 20
+            })
+        });
+
+        // Vector layer for PMTiles
+        const vectorLayer = new ol.layer.VectorTile({
+                declutter: true,
+                source: new olpmtiles.PMTilesVectorSource({
+                    url: "https://raw.githack.com/grace-du/crop-land-maps/main/congo.pmtiles"
+                }),
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'blue',
+                        width: 1,
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'rgba(20,20,20,0.9)',
+                    })
+                })
+            });
+
+        // OpenLayers map with the new base layer and vector layer
+        const map = new ol.Map({
+            layers: [hybridBaseLayer, vectorLayer],
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.fromLonLat([3.3, 7.85]),
+                zoom: 5
+            })
+        });
+    </script>
+</body>
+</html>
