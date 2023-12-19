@@ -1,27 +1,48 @@
-# Croplandmaps_V2 - Vector tiles
+# Croplandmaps - PMTiles
 
-Renders cropland maps as vector tiles to improve performance. Tiles only load the data a user needs at their current view and zoom level, which means they need to download less data and that data renders faster.
+PMTiles Concepts
 
-Some compromises are made when converting to tiles, to keep the tiles below a reasonable size. Some small features are removed or simplified at low zoom levels. These settings can be adjusted in the `./scripts/process` file (see the "Generating vector tiles" section for how to reprocess the tiles).
+PMTiles is a single-file archive format for pyramids of tiled data. A PMTiles archive can be hosted on a storage platform like S3, and enables low-cost, zero-maintenance map applications.
 
-## Viewing the app
+Most of the process is referred to here: https://docs.protomaps.com/pmtiles/
 
-- Run a simple server such as `python3 -m http.server`
+## Web Map link
 
-## Generating tiles
+[PMTiles Openlayer Vector Web Map](https://grace-du.github.io/crop-land-maps/)
 
-This project contains pregenerated tiles, which might be all you need. But if you want to change the tile generation settings, you can rerun the process.
+## Creating PMTiles
+
 
 ### Install dependencies
 
+- Installed WSL (if your computer is Windows)
 - Tippecanoe: [installation instructions](https://github.com/mapbox/tippecanoe#installation)
 - MBUtil: [installation instructions](https://github.com/mapbox/mbutil#installation)
+- Download the pmtiles binary for your system at go-pmtiles/Releases.
 
-### Add data
+### Data processing
+Convert the vector tiles to PMTiles format:
 
-- Add files `aoi1_boundarymerge.geojson` through `aoi16_boundarymerge.geojson` to `/data/input`
+Combined GeoJSON Files:
+```
+sudo apt install jq
+```
+```
+cat file1.geojson file2.geojson | jq -c '.features[]' | paste -sd "," - >> combined.geojson
+```
 
-### Generating vector tiles
+Convert .geojson file to mbtiles:
+```
+tippecanoe -o output.mbtiles -Z min_zoom -z max_zoom input.geojson
+```
 
-- Run the script `./scripts/process`
-- Move `/data/_output/tiles` to the root directory to view in app
+Convert .mbtiles to .pmtiles:
+```
+pmtiles convert INPUT.mbtiles OUTPUT.pmtiles
+```
+
+
+### Generating Web Map
+
+- Uploaded PMTiles to GitHub.https:main/congo.pmtiles
+- Enabled GitHub Pages. Set GitHub page to [index.html](https://github.com/grace-du/crop-land-maps/blob/main/index.html)
