@@ -11,6 +11,20 @@
             height: 100vh;
             margin: 0;
         }
+
+        /* stlyle for zoom extent button */
+        button.congo-button {
+            position: absolute;
+            top: 60px;
+            left: 10px;
+            z-index: 1000;
+            padding: 5px 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -37,7 +51,7 @@
                         width: 1,
                     }),
                     fill: new ol.style.Fill({
-                        color: 'rgba(20,20,20,0.9)',
+                        color: 'rgba(0,0,0,0)', //polygon fill transparent
                     })
                 })
             });
@@ -51,6 +65,27 @@
                 zoom: 5
             })
         });
+
+        // Congo extent (center and zoom)
+        const congoCenter = ol.proj.fromLonLat([15.8277, -0.2280]);
+        const congoZoom = 7;
+
+        // Function to zoom to the Congo extent
+        function zoomToCongo() {
+            map.getView().animate({
+                center: congoCenter,
+                zoom: congoZoom,
+                duration: 1000 // Smooth transition animation (1 second)
+            });
+        }
+
+        // Create and append the Congo button
+        const congoButton = document.createElement('button');
+        congoButton.innerHTML = 'Congo';
+        congoButton.className = 'congo-button';
+        congoButton.onclick = zoomToCongo;
+        // document.querySelector('.ol-overlaycontainer-stopevent').appendChild(congoButton); // Append to the container that holds controls
+        document.getElementById('map').appendChild(congoButton);
     </script>
 </body>
 </html>
