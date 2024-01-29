@@ -6,6 +6,8 @@ PMTiles is a single-file archive format for pyramids of tiled data. A PMTiles ar
 
 Most of the process is referred to here: https://docs.protomaps.com/pmtiles/
 
+Using the nature of PMTiles is a single-file archive format for pyramids of tiled data, each scaling level can be preloaded, which can solve the slow loading speed caused by vector files in .pbf format. The problem of large cache data.
+
 ## Web Map link
 
 [PMTiles Openlayer Vector Web Map](https://grace-du.github.io/crop-land-maps/)
